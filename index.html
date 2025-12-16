@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIRA - Mitra Strategis Pemerintah Daerah</title>
+
+    <!-- Fonts: Plus Jakarta Sans (Clean, Modern, readable) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            900: '#0F172A',
+                            800: '#1E293B',
+                            700: '#334155',
+                        },
+                        // Custom Primary Blue
+                        brand: {
+                            blue: '#32b4ec',
+                            blueDark: '#0ea5e9',
+                        },
+                        // Custom Secondary Red
+                        brandRed: {
+                            DEFAULT: '#c42a2d',
+                            light: '#fee2e2',
+                        },
+                        gray: {
+                            50: '#F8FAFC',
+                            100: '#F1F5F9',
+                            200: '#E2E8F0',
+                            500: '#64748B',
+                            600: '#475569',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+                        'hover': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Hide scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-navy-900 antialiased overflow-x-hidden">
+
+    <!-- NAVIGATION (Simple & Functional) -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 h-20 transition-all">
+        <div class="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
+
+            <!-- Brand -->
+            <div class="flex items-center gap-3">
+                <!-- BAGIAN LOGO -->
+                <!-- 
+                     CARA GANTI LOGO PNG: 
+                     1. Hapus div "M" di bawah ini.
+                     2. Aktifkan (uncomment) tag <img> di bawahnya.
+                     3. Ganti 'logo.png' dengan nama file logo Anda.
+                -->
+
+                <!-- Opsi 1: Logo Text (Saat ini aktif) -->
+                <!-- <div
+                    class="w-10 h-10 bg-navy-900 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                    M</div> -->
+
+                <!-- Opsi 2: Logo Gambar PNG (Aktifkan baris di bawah ini) -->
+                <img src="./assets/img/logo.png" alt="Logo MIRA" class="h-10 w-auto object-contain">
+
+                <div class="flex flex-col">
+                    <span class="font-bold text-navy-900 text-xl leading-none">MIRA</span>
+                    <span class="text-[11px] text-gray-500 font-medium">Unit Media Indonesia Raya</span>
+                </div>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="#masalah"
+                    class="text-sm font-medium text-gray-600 hover:text-brand-blue transition-colors">Tantangan</a>
+                <a href="#solusi"
+                    class="text-sm font-medium text-gray-600 hover:text-brand-blue transition-colors">Solusi</a>
+                <a href="#paket" class="text-sm font-medium text-gray-600 hover:text-brand-blue transition-colors">Paket
+                    Layanan</a>
+                <a href="#alur" class="text-sm font-medium text-gray-600 hover:text-brand-blue transition-colors">Alur
+                    Kerja</a>
+            </div>
+
+            <!-- CTA -->
+            <div class="flex items-center gap-4">
+                <a href="#kontak"
+                    class="hidden lg:flex items-center justify-center bg-brand-blue hover:bg-brand-blueDark text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-all shadow-soft">
+                    Hubungi Kami
+                </a>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="lg:hidden p-2 text-navy-900 hover:bg-gray-50 rounded-md">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu"
+            class="hidden lg:hidden border-t border-gray-100 bg-white absolute w-full left-0 top-20 shadow-lg">
+            <div class="flex flex-col p-4 space-y-2">
+                <a href="#masalah"
+                    class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Tantangan</a>
+                <a href="#solusi"
+                    class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Solusi</a>
+                <a href="#paket"
+                    class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Paket
+                    Layanan</a>
+                <a href="#alur"
+                    class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Alur Kerja</a>
+                <a href="#kontak"
+                    class="block px-4 py-3 text-sm font-bold text-brand-blue bg-blue-50 rounded-lg text-center mt-2">Hubungi
+                    Kami</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. HERO SECTION (Clean, Direct, Trustworthy) -->
+    <section class="pt-32 pb-20 lg:pt-40 lg:pb-32 bg-gray-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+
+            <!-- Left: Content -->
+            <div>
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 bg-white border border-gray-200 rounded-full text-gray-600 text-xs font-semibold mb-6 shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-brand-blue"></span>
+                    Mitra Teknis Pemerintah Daerah
+                </div>
+
+                <h1 class="text-4xl lg:text-5xl font-bold text-navy-900 leading-tight mb-6">
+                    Sistem Integrasi <br>
+                    <span class="text-brand-blue">Komunikasi & Digitalisasi</span>
+                </h1>
+
+                <p class="text-lg text-gray-600 mb-8 leading-relaxed max-w-lg">
+                    Satu pintu solusi untuk kebutuhan komunikasi publik, sistem digital, dan visual instansi yang
+                    terstandarisasi.
+                    <span class="block mt-2 text-sm font-medium text-navy-900">Bernaung di bawah Media Indonesia
+                        Raya.</span>
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#kontak"
+                        class="inline-flex justify-center items-center px-8 py-3.5 bg-brand-blue hover:bg-brand-blueDark text-white font-bold rounded-lg transition-all shadow-md hover:shadow-lg">
+                        Ajukan Kerja Sama
+                    </a>
+                    <a href="#solusi"
+                        class="inline-flex justify-center items-center px-8 py-3.5 bg-white border border-gray-200 text-navy-900 font-bold rounded-lg hover:bg-gray-50 transition-all">
+                        Pelajari Layanan
+                    </a>
+                </div>
+
+                <!-- Trust Indicators -->
+                <div class="mt-10 flex items-center gap-6 text-sm text-gray-500 font-medium">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="shield-check" class="w-5 h-5 text-brand-blue"></i>
+                        Terpercaya
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-brand-blue"></i>
+                        Profesional
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="award" class="w-5 h-5 text-brand-blue"></i>
+                        Berpengalaman
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Visual (Clean Image) -->
+            <div class="relative">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                    <!-- BAGIAN GAMBAR HERO -->
+                    <!-- 
+                         CARA GANTI GAMBAR HERO: 
+                         Ganti link di dalam src="..." dengan link gambar/file Anda.
+                         Pastikan gambar orientasinya landscape (mendatar) agar rapi.
+                    -->
+                    <img src="./assets/img/hero.png"
+                        alt="Rapat Koordinasi Pemerintah" class="w-full h-auto object-cover">
+                    <div class="absolute inset-0 bg-navy-900/10"></div>
+                </div>
+
+                <!-- Floating Stats Card -->
+                <div
+                    class="absolute -bottom-6 -left-6 bg-white p-5 rounded-xl shadow-lg border border-gray-100 hidden md:block">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-blue-50 p-3 rounded-lg text-brand-blue">
+                            <i data-lucide="users" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-navy-900">15+</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold">Instansi Mitra
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. SECTION: PROBLEM (Clear Cards) -->
+    <section id="masalah" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-navy-900 mb-4">Tantangan Tata Kelola</h2>
+                <p class="text-gray-600">Identifikasi masalah utama dalam komunikasi dan digitalisasi daerah.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div
+                    class="p-6 rounded-xl bg-white border border-gray-100 shadow-soft hover:shadow-hover transition-all">
+                    <div class="w-12 h-12 bg-red-50 text-brandRed rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="unlink" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-navy-900 mb-2">Informasi Terpisah</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Publikasi antar dinas sering tidak selaras,
+                        membingungkan masyarakat dalam menerima informasi.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="p-6 rounded-xl bg-white border border-gray-100 shadow-soft hover:shadow-hover transition-all">
+                    <div class="w-12 h-12 bg-red-50 text-brandRed rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="monitor-off" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-navy-900 mb-2">Sistem Belum Optimal</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Website dan layanan digital seringkali sulit
+                        diakses, tidak aman, atau jarang diperbarui.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="p-6 rounded-xl bg-white border border-gray-100 shadow-soft hover:shadow-hover transition-all">
+                    <div class="w-12 h-12 bg-red-50 text-brandRed rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="image-off" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-navy-900 mb-2">Visual Tidak Konsisten</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Kurangnya standar branding visual membuat citra
+                        instansi terlihat kurang profesional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. SECTION: SOLUTION / EKOSISTEM (Easy to Scan List) -->
+    <section id="solusi" class="py-20 bg-gray-50 border-y border-gray-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-12 text-center">
+                <span class="text-brand-blue font-bold tracking-wider uppercase text-xs mb-2 block">Solusi
+                    Terintegrasi</span>
+                <h2 class="text-3xl font-bold text-navy-900">Ekosistem Layanan MIRA</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Service 1 -->
+                <div
+                    class="bg-white p-6 rounded-xl border border-gray-200 flex items-start gap-4 hover:border-brand-blue transition-colors">
+                    <div class="bg-blue-50 p-3 rounded-lg text-brand-blue shrink-0">
+                        <i data-lucide="megaphone" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-navy-900">MIRA Agency</h3>
+                        <p class="text-sm text-brand-blue font-medium mb-2">Komunikasi & Branding</p>
+                        <p class="text-sm text-gray-600">Manajemen media sosial, produksi konten visual, dan strategi
+                            komunikasi kebijakan.</p>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div
+                    class="bg-white p-6 rounded-xl border border-gray-200 flex items-start gap-4 hover:border-brand-blue transition-colors">
+                    <div class="bg-navy-900 p-3 rounded-lg text-white shrink-0">
+                        <i data-lucide="laptop" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-navy-900">E-MIRA System</h3>
+                        <p class="text-sm text-brand-blue font-medium mb-2">Digitalisasi Layanan</p>
+                        <p class="text-sm text-gray-600">Pembuatan website resmi, landing page program, dan dashboard
+                            data terpusat.</p>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div
+                    class="bg-white p-6 rounded-xl border border-gray-200 flex items-start gap-4 hover:border-brand-blue transition-colors">
+                    <div class="bg-gray-100 p-3 rounded-lg text-gray-600 shrink-0">
+                        <i data-lucide="palette" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-navy-900">MIRA Decoration</h3>
+                        <p class="text-sm text-brand-blue font-medium mb-2">Tata Ruang & Fisik</p>
+                        <p class="text-sm text-gray-600">Konstruksi backdrop acara, branding ruang publik, dan
+                            visualisasi kegiatan resmi.</p>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div
+                    class="bg-white p-6 rounded-xl border border-gray-200 flex items-start gap-4 hover:border-brand-blue transition-colors">
+                    <div class="bg-gray-100 p-3 rounded-lg text-gray-600 shrink-0">
+                        <i data-lucide="mic" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-navy-900">Media & Publikasi</h3>
+                        <p class="text-sm text-brand-blue font-medium mb-2">Podcast & Awards</p>
+                        <p class="text-sm text-gray-600">Podcast pimpinan daerah dan penyelenggaraan apresiasi kinerja
+                            OPD.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SECTION: PRICING (Clear Comparison) -->
+    <section id="paket" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-bold text-navy-900 text-center mb-16">Pilihan Skema Kerja Sama</h2>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Basic Plan -->
+                <div class="border border-gray-200 rounded-2xl p-8 hover:shadow-lg transition-shadow">
+                    <div class="mb-6">
+                        <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Paket
+                            Dasar</span>
+                        <h3 class="text-2xl font-bold text-navy-900 mt-4">Rp 2.899.000<span
+                                class="text-sm font-normal text-gray-500">/bln</span></h3>
+                        <p class="text-gray-500 text-sm mt-2">Untuk kebutuhan operasional rutin OPD.</p>
+                    </div>
+
+                    <hr class="border-gray-100 my-6">
+
+                    <ul class="space-y-4 text-sm text-gray-600 mb-8">
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-gray-400"></i>
+                            6–8 Dokumen Informasi Digital</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-gray-400"></i>
+                            Standarisasi Template Visual</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-gray-400"></i>
+                            Revisi Teknis (Maks. 2x)</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-gray-400"></i>
+                            Rapat Koordinasi (2x/Bln)</li>
+                    </ul>
+
+                    <a href="#kontak"
+                        class="block w-full py-3 border border-navy-900 text-navy-900 font-bold text-center rounded-lg hover:bg-gray-50 transition-colors">
+                        Pilih Paket Dasar
+                    </a>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="border-2 border-brand-blue rounded-2xl p-8 relative shadow-xl bg-white">
+                    <div
+                        class="absolute top-4 right-4 bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full uppercase">
+                        Rekomendasi</div>
+                    <div class="mb-6">
+                        <span
+                            class="bg-blue-50 text-brand-blue text-xs font-bold px-3 py-1 rounded-full uppercase">Paket
+                            Premium</span>
+                        <h3 class="text-2xl font-bold text-brand-blue mt-4">Rp 4.499.000<span
+                                class="text-sm font-normal text-gray-500">/bln</span></h3>
+                        <p class="text-gray-500 text-sm mt-2">Untuk program unggulan & pimpinan daerah.</p>
+                    </div>
+
+                    <hr class="border-gray-100 my-6">
+
+                    <ul class="space-y-4 text-sm text-navy-900 font-medium mb-8">
+                        <li class="flex items-center gap-3"><i data-lucide="check-circle"
+                                class="w-5 h-5 text-brand-blue"></i> 8–12 Dokumen Informasi Eksklusif</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check-circle"
+                                class="w-5 h-5 text-brand-blue"></i> 1 Landing Page Program</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check-circle"
+                                class="w-5 h-5 text-brand-blue"></i> Penyusunan Narasi (Copywriting)</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check-circle"
+                                class="w-5 h-5 text-brand-blue"></i> Revisi Teknis (Maks. 5x)</li>
+                    </ul>
+
+                    <a href="#kontak"
+                        class="block w-full py-3 bg-brand-blue text-white font-bold text-center rounded-lg hover:bg-brand-blueDark transition-colors shadow-md">
+                        Pilih Paket Premium
+                    </a>
+                </div>
+            </div>
+            <p class="text-center text-xs text-gray-400 mt-8 italic">*Harga belum termasuk PPN & Biaya Administrasi.</p>
+        </div>
+    </section>
+
+    <!-- 5. SECTION: PROCESS (Simple Steps) -->
+    <section id="alur" class="py-20 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-navy-900">Tahapan Kerja Sama</h2>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div
+                        class="w-12 h-12 bg-white text-navy-900 border border-gray-200 rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 shadow-sm">
+                        1</div>
+                    <h4 class="font-bold text-navy-900 mb-2">Koordinasi</h4>
+                    <p class="text-sm text-gray-500">Pemetaan kebutuhan & strategi.</p>
+                </div>
+                <div class="text-center">
+                    <div
+                        class="w-12 h-12 bg-white text-brand-blue border border-brand-blue rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 shadow-sm">
+                        2</div>
+                    <h4 class="font-bold text-navy-900 mb-2">Produksi</h4>
+                    <p class="text-sm text-gray-500">Pembuatan aset & sistem.</p>
+                </div>
+                <div class="text-center">
+                    <div
+                        class="w-12 h-12 bg-white text-navy-900 border border-gray-200 rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 shadow-sm">
+                        3</div>
+                    <h4 class="font-bold text-navy-900 mb-2">Implementasi</h4>
+                    <p class="text-sm text-gray-500">Eksekusi & publikasi.</p>
+                </div>
+                <div class="text-center">
+                    <div
+                        class="w-12 h-12 bg-white text-gray-400 border border-gray-200 rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 shadow-sm">
+                        4</div>
+                    <h4 class="font-bold text-navy-900 mb-2">Evaluasi</h4>
+                    <p class="text-sm text-gray-500">Laporan kinerja.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. CONTACT (Clean Form) -->
+    <section id="kontak" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="bg-navy-900 text-white rounded-2xl p-8 lg:p-12 shadow-2xl">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-4">Hubungi Tim Teknis</h2>
+                        <p class="text-blue-100 text-sm mb-8 leading-relaxed">
+                            Silakan isi formulir untuk menjadwalkan rapat koordinasi atau meminta proposal resmi.
+                        </p>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="mail" class="w-5 h-5"></i>
+                                </div>
+                                <div class="text-sm">
+                                    <div class="text-gray-400 text-xs uppercase">Email</div>
+                                    kerjasama@mira.go.id
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="message-square" class="w-5 h-5"></i>
+                                </div>
+                                <div class="text-sm">
+                                    <div class="text-gray-400 text-xs uppercase">WhatsApp</div>
+                                    +62 812 3456 7890
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="space-y-4">
+                        <div>
+                            <label class="text-xs font-bold text-gray-400 uppercase block mb-1">Nama Instansi</label>
+                            <input type="text"
+                                class="w-full bg-navy-800 border border-navy-700 rounded-lg p-3 text-white text-sm focus:border-brand-blue focus:outline-none placeholder-gray-600"
+                                placeholder="Dinas / Badan...">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-gray-400 uppercase block mb-1">Kontak Person</label>
+                            <input type="text"
+                                class="w-full bg-navy-800 border border-navy-700 rounded-lg p-3 text-white text-sm focus:border-brand-blue focus:outline-none placeholder-gray-600"
+                                placeholder="Nama & No. HP">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-gray-400 uppercase block mb-1">Kebutuhan</label>
+                            <select
+                                class="w-full bg-navy-800 border border-navy-700 rounded-lg p-3 text-white text-sm focus:border-brand-blue focus:outline-none">
+                                <option>Paket Dasar</option>
+                                <option>Paket Premium</option>
+                                <option>Konsultasi Custom</option>
+                            </select>
+                        </div>
+                        <button type="button"
+                            class="w-full bg-brand-blue hover:bg-brand-blueDark text-white font-bold py-3.5 rounded-lg mt-2 transition-colors">
+                            Kirim Permohonan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-50 border-t border-gray-200 py-12 text-sm text-gray-500">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="text-navy-900 font-bold text-lg">MIRA</span>
+                </div>
+                <p class="max-w-xs mb-4">Unit strategis Media Indonesia Raya untuk dukungan teknis pemerintahan daerah.
+                </p>
+                <p>&copy; 2025 MIRA. Hak Cipta Dilindungi.</p>
+            </div>
+            <div class="md:text-right">
+                <div class="font-bold text-navy-900 mb-2">Kantor Operasional</div>
+                <p>Gedung Media Indonesia Raya</p>
+                <p>Jakarta, Indonesia</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Simple Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>
